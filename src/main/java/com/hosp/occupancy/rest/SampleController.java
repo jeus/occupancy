@@ -1,3 +1,7 @@
+/*
+ * @author jeus (suje@protonmail.com)
+ * @since 2/25/20
+ */
 package com.hosp.occupancy.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;

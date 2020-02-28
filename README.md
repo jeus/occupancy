@@ -1,12 +1,17 @@
 # GETTING STARTED
 
+### How Develop this code?
+* all files that you have to change. 
+
+
 ### How To Build
 
 
 ### How Run
+
 For further reference, please consider the following sections:
 
-* [Link for see the swagger](localhost/swagger...)
+* [Link for see the swagger UI](http://localhost:5000/swagger-ui.html)
 
 
 ### Deploy
