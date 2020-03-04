@@ -7,7 +7,6 @@ Feature: add new room feature
     Then return countEconomy: 1, countFreeEconomy: 1, countFreePremium: 0, countPremium: 0
 
 
-
   Scenario: there is one economy room
     Given defined one economy room
     When add new economy room to hotel

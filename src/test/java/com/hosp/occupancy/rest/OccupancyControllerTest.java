@@ -1,4 +1,4 @@
-package com.hosp.occupancy.rest.acceptancetest;
+package com.hosp.occupancy.rest;
 
 import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.exception.PublicException;
