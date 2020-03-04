@@ -1,8 +1,9 @@
-package com.hosp.occupancy.rest;
+package com.hosp.occupancy.rest.acceptancetest;
 
 import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.exception.PublicException;
 import com.hosp.occupancy.model.dto.RoomInsertDto;
+import com.hosp.occupancy.rest.OccupancyController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
