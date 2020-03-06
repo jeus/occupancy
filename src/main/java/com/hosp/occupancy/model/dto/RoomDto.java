@@ -14,9 +14,9 @@ import java.util.List;
 @Data
 public class RoomDto {
 
-    long countEconomy;
-    long countPremium;
-    long countFreeEconomy;
-    long countFreePremium;
+    int countEconomy;
+    int countPremium;
+    int countFreeEconomy;
+    int countFreePremium;
     List<RoomAbstract> rooms;
 }

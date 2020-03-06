@@ -6,8 +6,7 @@
 package com.hosp.occupancy.rest;
 
 import com.hosp.occupancy.model.dto.CustomerPotentialDto;
-import com.hosp.occupancy.model.dto.RoomDto;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Data;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
+@Data
 public class CustomerController {
-List<Integer> potential = new ArrayList<>();
+    List<Integer> potential = new ArrayList<>();
 
     @PostMapping
     public List<Integer> addPotential(CustomerPotentialDto customerPotentialDto) {
-        potential.clear();
+        if (customerPotentialDto == null)
+            return null;
         potential = customerPotentialDto.getPotential();
         return potential;
     }

@@ -6,39 +6,59 @@ package com.hosp.occupancy.acceptancetest.step;
 
 import com.hosp.occupancy.common.exception.ExceptionDictionary;
 import com.hosp.occupancy.common.exception.PublicException;
+import com.hosp.occupancy.core.Occupancy;
 import com.hosp.occupancy.model.dto.CustomerPotentialDto;
 import com.hosp.occupancy.model.dto.FreeRoomDto;
 import com.hosp.occupancy.model.dto.HotelStateDto;
 import com.hosp.occupancy.rest.CustomerController;
+import com.hosp.occupancy.rest.WizardController;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.Map;
 
-
+@SpringBootTest
 public class PotentialCustomer {
 
     @Autowired
     CustomerController customerController;
 
+    @Autowired
+    WizardController wizardController;
+
+    @Autowired
+    Occupancy occupancy;
+
 
     @Given("add potential customers {string}")
-    public void addPotentialCustomers(String potentials) {
-        System.out.println(potentials);
-        var customerPotentialDto = customerPotentialMapper(potentials);
-//        customerController.addPotential(customerPotentialDto);
+    public void addPotentialCustomers(String potential) {
+        System.out.println("[POT]-{" + potential + "}");
+        var customerPotentialDto = customerPotentialMapper(potential);
+        customerController.addPotential(customerPotentialDto);
     }
 
     @When("add free room {int} {int}")
     public void addFreeRoomCountEconomyCountPremium(int CountEconomy, int CountPremium) {
-        var freeRoomDto = freeRoomMapper(CountEconomy,CountPremium);
+        System.out.println("[ECO]-{" + CountEconomy + "}---{" + CountPremium + "}-[PRM]");
+        var freeRoomDto = freeRoomMapper(CountEconomy, CountPremium);
+        HotelStateDto hotelStateDto = wizardController.addRooms(freeRoomDto);
+        System.out.println(hotelStateDto);
     }
 
     @Then("calculate {long} {long} {long} {long}")
-    public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long CountFreeEconomy, long CountFreePremium, long EconomyIncome, long PremiumIncome) {
+    public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long countFreeEconomy, long countFreePremium, long economyIncome, long premiumIncome) {
+
+        HotelStateDto hotelStateDto =occupancy.calculateFromScrach();
+        Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelStateDto.getCountFreeEconomy());
+        Assert.assertEquals("economyIncome:",economyIncome,hotelStateDto.getEconomyIncome());
+
+        Assert.assertEquals("countFreePremium:",countFreePremium,hotelStateDto.getCountFreePremium());
+        Assert.assertEquals("premiumIncome:",premiumIncome,hotelStateDto.getPremiumIncome());
 
     }
 
@@ -64,6 +84,8 @@ public class PotentialCustomer {
     }
 
     public CustomerPotentialDto customerPotentialMapper(String potential) {
+        if (potential.isEmpty())
+            return null;
         CustomerPotentialDto row = new CustomerPotentialDto();
         String[] items = potential.replaceAll("\\[", "")
                 .replaceAll("\\s", "").split(",");

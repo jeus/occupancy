@@ -14,8 +14,11 @@ import java.util.List;
 @Component
 public class InsertRoomValidator {
 
-    @Autowired
-    private AssertHelper assertHelper;
+    private final AssertHelper assertHelper;
+
+    public InsertRoomValidator(AssertHelper assertHelper) {
+        this.assertHelper = assertHelper;
+    }
 
     public void validateRoomForInsert(RoomAbstract newRoom, List<RoomAbstract> rooms) {
         assertHelper.notNull(newRoom.getNumber());

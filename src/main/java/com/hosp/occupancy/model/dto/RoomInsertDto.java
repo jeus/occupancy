@@ -14,5 +14,4 @@ public class RoomInsertDto {
     int floor;
     int number;
     String description;
-
 }

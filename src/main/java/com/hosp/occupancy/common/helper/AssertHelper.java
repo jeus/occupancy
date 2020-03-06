@@ -7,8 +7,6 @@ package com.hosp.occupancy.common.helper;
 
 import com.hosp.occupancy.common.exception.PublicException;
 
-import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Map;
 
 

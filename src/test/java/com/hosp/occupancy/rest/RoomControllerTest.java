@@ -3,7 +3,6 @@ package com.hosp.occupancy.rest;
 import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.exception.PublicException;
 import com.hosp.occupancy.model.dto.RoomInsertDto;
-import com.hosp.occupancy.rest.OccupancyController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +14,14 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class OccupancyControllerTest {
+class RoomControllerTest {
 
     @Autowired
-    OccupancyController occupancyController;
+    RoomController roomController;
 
     @BeforeEach
     void setUp() {
-        occupancyController.rooms = new ArrayList<>();
+        roomController.rooms = new ArrayList<>();
     }
 
     @AfterEach
@@ -37,7 +36,7 @@ class OccupancyControllerTest {
         roomInsertDto.setNumber(11);
         roomInsertDto.setRoomType(RoomType.ECONOMY);
         roomInsertDto.setDescription("new Room in hotel");
-        var roomDto = occupancyController.addRoom(roomInsertDto);
+        var roomDto = roomController.addRoom(roomInsertDto);
 
         assertEquals(1, roomDto.getCountEconomy());
         assertEquals(1, roomDto.getCountFreeEconomy());
@@ -54,8 +53,8 @@ class OccupancyControllerTest {
         var roomInsertDto = createNewInserRoomDto(1, 11, RoomType.ECONOMY, "new Room in hotel");
         var roomInsertDto1 = createNewInserRoomDto(1, 12, RoomType.ECONOMY, "new Room in hotel");
 
-        occupancyController.addRoom(roomInsertDto);
-        var roomDto = occupancyController.addRoom(roomInsertDto1);
+        roomController.addRoom(roomInsertDto);
+        var roomDto = roomController.addRoom(roomInsertDto1);
 
         assertEquals(2, roomDto.getCountEconomy());
         assertEquals(2, roomDto.getCountFreeEconomy());
@@ -69,8 +68,8 @@ class OccupancyControllerTest {
         var roomInsertDto = createNewInserRoomDto(1, 11, RoomType.ECONOMY, "new Room in hotel");
         var roomInsertDto1 = createNewInserRoomDto(1, 11, RoomType.ECONOMY, "new Room in hotel");
 
-        occupancyController.addRoom(roomInsertDto);
-        assertThrows(PublicException.class, () -> occupancyController.addRoom(roomInsertDto1));
+        roomController.addRoom(roomInsertDto);
+        assertThrows(PublicException.class, () -> roomController.addRoom(roomInsertDto1));
     }
 
 
