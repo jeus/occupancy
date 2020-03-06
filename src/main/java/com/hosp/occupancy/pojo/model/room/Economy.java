@@ -8,11 +8,7 @@ package com.hosp.occupancy.pojo.model.room;
 import com.hosp.occupancy.common.enums.RoomType;
 
 
-public class Economy extends RoomAbstract implements Room {
+public class Economy extends RoomAbstract {
     public Economy(){setRoomType(RoomType.ECONOMY);}
 
-    @Override
-    int getMaxPrice() {
-        return 100;
-    }
 }

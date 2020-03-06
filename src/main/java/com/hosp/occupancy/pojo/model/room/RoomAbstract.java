@@ -9,7 +9,7 @@ import com.hosp.occupancy.common.enums.RoomType;
 import lombok.Data;
 
 @Data
-public abstract class RoomAbstract implements Room {
+public abstract class RoomAbstract {
 
     RoomType roomType = null;
     int floor = 0;
@@ -17,15 +17,15 @@ public abstract class RoomAbstract implements Room {
     String description = null;
     boolean free = true;
 
-    @Override
-    public void setFree() {
+    public void free() {
         this.free = true;
     }
 
-    @Override
-    public void setReserve() {
+    public void book() {
         this.free = false;
     }
 
-    abstract int getMaxPrice();
+    public int getMinPrice(){
+        return roomType.getMinPrice();
+    }
 }

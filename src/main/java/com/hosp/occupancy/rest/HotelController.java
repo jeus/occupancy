@@ -2,7 +2,6 @@
  * @author jeus (suje@protonmail.com)
  * @since 3/6/20
  */
-
 package com.hosp.occupancy.rest;
 
 import com.hosp.occupancy.common.translator.HotelMapper;

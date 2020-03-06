@@ -10,8 +10,5 @@ import com.hosp.occupancy.common.enums.RoomType;
 public class Premium extends RoomAbstract {
     public Premium(){setRoomType(RoomType.PREMIUM);}
 
-    @Override
-    int getMaxPrice() {
-        return 400;
-    }
+
 }
