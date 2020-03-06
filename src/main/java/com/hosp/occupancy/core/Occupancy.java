@@ -18,10 +18,14 @@ import java.util.stream.Collectors;
 @Component
 public class Occupancy {
 
-    @Autowired
-    CustomerController customerController;
-    @Autowired
-    RoomController roomController;
+    final CustomerController customerController;
+    final RoomController roomController;
+
+    public Occupancy(CustomerController customerController, RoomController roomController) {
+        this.customerController = customerController;
+        this.roomController = roomController;
+    }
+
 
     /**
      * call after add rooms
@@ -63,6 +67,7 @@ public class Occupancy {
         }
         return creteHotelState(premiumIncome, economyIncome, roomDto);
     }
+
 
     /**
      * if we want calculate without clear history after add new potential

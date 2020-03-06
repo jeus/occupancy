@@ -19,7 +19,7 @@ public class RoomHelper {
 
     public RoomInsertDto createRandom(RoomType roomType) {
         final var base = 100;
-        final var countFloor = 10;
+        final var countFloor = 100;
         final var countRoomsFloor = 99;
         Random rand = new Random();
         int floor = rand.nextInt(countFloor) + 1;

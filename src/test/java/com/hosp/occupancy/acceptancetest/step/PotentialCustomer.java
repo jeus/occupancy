@@ -11,7 +11,7 @@ import com.hosp.occupancy.model.dto.CustomerPotentialDto;
 import com.hosp.occupancy.model.dto.FreeRoomDto;
 import com.hosp.occupancy.model.dto.HotelStateDto;
 import com.hosp.occupancy.rest.CustomerController;
-import com.hosp.occupancy.rest.WizardController;
+import com.hosp.occupancy.rest.RoomController;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,7 +29,7 @@ public class PotentialCustomer {
     CustomerController customerController;
 
     @Autowired
-    WizardController wizardController;
+    RoomController roomController;
 
     @Autowired
     Occupancy occupancy;
@@ -46,14 +46,13 @@ public class PotentialCustomer {
     public void addFreeRoomCountEconomyCountPremium(int CountEconomy, int CountPremium) {
         System.out.println("[ECO]-{" + CountEconomy + "}---{" + CountPremium + "}-[PRM]");
         var freeRoomDto = freeRoomMapper(CountEconomy, CountPremium);
-        HotelStateDto hotelStateDto = wizardController.addRooms(freeRoomDto);
-        System.out.println(hotelStateDto);
+        roomController.addRooms(freeRoomDto);
     }
 
     @Then("calculate {long} {long} {long} {long}")
     public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long countFreeEconomy, long countFreePremium, long economyIncome, long premiumIncome) {
 
-        HotelStateDto hotelStateDto =occupancy.calculateFromScrach();
+        HotelStateDto hotelStateDto = occupancy.calculateFromScrach();
         Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelStateDto.getCountFreeEconomy());
         Assert.assertEquals("economyIncome:",economyIncome,hotelStateDto.getEconomyIncome());
 

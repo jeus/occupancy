@@ -5,8 +5,12 @@
 
 package com.hosp.occupancy.rest;
 
+import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.helper.room.RoomHelper;
 import com.hosp.occupancy.common.helper.room.factory.RoomFactory;
+import com.hosp.occupancy.core.Occupancy;
+import com.hosp.occupancy.model.dto.FreeRoomDto;
+import com.hosp.occupancy.model.dto.HotelStateDto;
 import com.hosp.occupancy.model.room.RoomAbstract;
 import com.hosp.occupancy.model.dto.RoomInsertDto;
 import com.hosp.occupancy.model.dto.RoomDto;
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping("/hotel/room")
 public class RoomController {
 
     final RoomHelper roomHelper;
@@ -49,6 +53,15 @@ public class RoomController {
         rooms.clear();
     }
 
+    @PostMapping("/wizard")
+    public RoomDto addRooms(FreeRoomDto freeRoomDto) {
+        clearRooms();
+        for (var i = 0; i < freeRoomDto.getCountEconomy(); i++)
+            addRoom(roomHelper.createRandom(RoomType.ECONOMY));
+        for (var i = 0; i < freeRoomDto.getCountPremium(); i++)
+            addRoom(roomHelper.createRandom(RoomType.PREMIUM));
+        return roomHelper.roomMapper(rooms);
+    }
 
 
 }

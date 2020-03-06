@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/hotel/customer")
 @Data
 public class CustomerController {
     List<Integer> potential = new ArrayList<>();
