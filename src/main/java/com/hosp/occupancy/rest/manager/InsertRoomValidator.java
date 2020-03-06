@@ -5,8 +5,7 @@
 package com.hosp.occupancy.rest.manager;
 
 import com.hosp.occupancy.common.helper.AssertHelper;
-import com.hosp.occupancy.model.room.RoomAbstract;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.hosp.occupancy.pojo.model.room.RoomAbstract;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

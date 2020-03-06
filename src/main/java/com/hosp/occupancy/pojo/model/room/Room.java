@@ -3,10 +3,7 @@
  * @since 3/2/20
  */
 
-package com.hosp.occupancy.model.room;
-
-import com.hosp.occupancy.common.enums.RoomType;
-import lombok.Data;
+package com.hosp.occupancy.pojo.model.room;
 
 
 public interface Room {

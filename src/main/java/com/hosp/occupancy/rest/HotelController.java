@@ -6,7 +6,7 @@
 package com.hosp.occupancy.rest;
 
 import com.hosp.occupancy.core.Occupancy;
-import com.hosp.occupancy.model.dto.HotelStateDto;
+import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +28,9 @@ public class HotelController {
         return hotelStateDto;
     }
 
-    @GetMapping("/calculate")
-    public HotelStateDto calculateFromScratch() {
-        return occupancy.calculateFromScrach();
+    @GetMapping("/book")
+    public HotelStateDto book() {
+        return occupancy.bookFromScrach();
     }
 
 }

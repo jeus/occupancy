@@ -6,9 +6,9 @@ package com.hosp.occupancy.common.helper.room;
 
 import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.helper.room.factory.RoomFactory;
-import com.hosp.occupancy.model.dto.RoomDto;
-import com.hosp.occupancy.model.dto.RoomInsertDto;
-import com.hosp.occupancy.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.dto.room.RoomDto;
+import com.hosp.occupancy.pojo.dto.room.RoomInsertDto;
+import com.hosp.occupancy.pojo.model.room.RoomAbstract;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,15 +32,7 @@ public class RoomHelper {
         return roomInsertDto;
     }
 
-    public RoomDto roomMapper( List<RoomAbstract> rooms){
-        var roomDto = new RoomDto();
-        roomDto.setCountEconomy((int)rooms.stream().filter(r -> r.getRoomType() == RoomType.ECONOMY).count());
-        roomDto.setCountPremium((int)rooms.stream().filter(r -> r.getRoomType() == RoomType.PREMIUM).count());
-        roomDto.setCountFreeEconomy((int)rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.ECONOMY).count());
-        roomDto.setCountFreePremium((int)rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.PREMIUM).count());
-        roomDto.setRooms(rooms);
-        return roomDto;
-    }
+
 
     public RoomAbstract roomFactory(RoomInsertDto roomInsertDto){
         RoomFactory roomFactory = new RoomFactory();

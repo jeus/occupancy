@@ -3,7 +3,7 @@
  * @since 3/4/20
  */
 
-package com.hosp.occupancy.model.dto;
+package com.hosp.occupancy.pojo.dto.room;
 
 import lombok.Data;
 

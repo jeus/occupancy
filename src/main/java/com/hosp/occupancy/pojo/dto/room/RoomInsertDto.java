@@ -3,7 +3,7 @@
  * @since 3/2/20
  */
 
-package com.hosp.occupancy.model.dto;
+package com.hosp.occupancy.pojo.dto.room;
 
 import com.hosp.occupancy.common.enums.RoomType;
 import lombok.Data;

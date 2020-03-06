@@ -3,7 +3,7 @@
  * @since 3/2/20
  */
 
-package com.hosp.occupancy.model.room;
+package com.hosp.occupancy.pojo.model.room;
 
 import com.hosp.occupancy.common.enums.RoomType;
 

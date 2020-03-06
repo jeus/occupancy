@@ -7,9 +7,9 @@ package com.hosp.occupancy.acceptancetest.step;
 import com.hosp.occupancy.common.exception.ExceptionDictionary;
 import com.hosp.occupancy.common.exception.PublicException;
 import com.hosp.occupancy.core.Occupancy;
-import com.hosp.occupancy.model.dto.CustomerPotentialDto;
-import com.hosp.occupancy.model.dto.FreeRoomDto;
-import com.hosp.occupancy.model.dto.HotelStateDto;
+import com.hosp.occupancy.pojo.dto.customer.CustomerPotentialDto;
+import com.hosp.occupancy.pojo.dto.room.FreeRoomDto;
+import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
 import com.hosp.occupancy.rest.CustomerController;
 import com.hosp.occupancy.rest.RoomController;
 import io.cucumber.java.en.Given;
@@ -52,7 +52,7 @@ public class PotentialCustomer {
     @Then("calculate {long} {long} {long} {long}")
     public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long countFreeEconomy, long countFreePremium, long economyIncome, long premiumIncome) {
 
-        HotelStateDto hotelStateDto = occupancy.calculateFromScrach();
+        HotelStateDto hotelStateDto = occupancy.bookFromScrach();
         Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelStateDto.getCountFreeEconomy());
         Assert.assertEquals("economyIncome:",economyIncome,hotelStateDto.getEconomyIncome());
 

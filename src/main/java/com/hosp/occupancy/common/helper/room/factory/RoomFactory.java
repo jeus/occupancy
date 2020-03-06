@@ -5,10 +5,10 @@
 package com.hosp.occupancy.common.helper.room.factory;
 
 import com.hosp.occupancy.common.enums.RoomType;
-import com.hosp.occupancy.model.dto.RoomInsertDto;
-import com.hosp.occupancy.model.room.Economy;
-import com.hosp.occupancy.model.room.Premium;
-import com.hosp.occupancy.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.dto.room.RoomInsertDto;
+import com.hosp.occupancy.pojo.model.room.Economy;
+import com.hosp.occupancy.pojo.model.room.Premium;
+import com.hosp.occupancy.pojo.model.room.RoomAbstract;
 
 public class RoomFactory extends AbstractFactory {
 

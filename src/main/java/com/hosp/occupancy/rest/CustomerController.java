@@ -5,7 +5,7 @@
 
 package com.hosp.occupancy.rest;
 
-import com.hosp.occupancy.model.dto.CustomerPotentialDto;
+import com.hosp.occupancy.pojo.dto.customer.CustomerPotentialDto;
 import lombok.Data;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
