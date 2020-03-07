@@ -8,6 +8,9 @@
 
 
 ### How Run
+##By Docker
+go to project directory. \
+docker-compose up 
 
 For further reference, please consider the following sections:
 

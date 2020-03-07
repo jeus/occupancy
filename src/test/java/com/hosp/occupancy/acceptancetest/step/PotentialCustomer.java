@@ -52,12 +52,12 @@ public class PotentialCustomer {
     @Then("calculate {long} {long} {long} {long}")
     public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long countFreeEconomy, long countFreePremium, long economyIncome, long premiumIncome) {
 
-        HotelStateDto hotelStateDto = occupancy.bookFromScrach();
-        Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelStateDto.getCountFreeEconomy());
-        Assert.assertEquals("economyIncome:",economyIncome,hotelStateDto.getEconomyIncome());
+        var hotelState = occupancy.bookFromScrach();
+        Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelState.getCountFreeEconomy());
+        Assert.assertEquals("economyIncome:",economyIncome,hotelState.getEconomyIncome());
 
-        Assert.assertEquals("countFreePremium:",countFreePremium,hotelStateDto.getCountFreePremium());
-        Assert.assertEquals("premiumIncome:",premiumIncome,hotelStateDto.getPremiumIncome());
+        Assert.assertEquals("countFreePremium:",countFreePremium,hotelState.getCountFreePremium());
+        Assert.assertEquals("premiumIncome:",premiumIncome,hotelState.getPremiumIncome());
 
     }
 

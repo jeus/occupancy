@@ -3,6 +3,7 @@ package com.hosp.occupancy.core;
 import com.hosp.occupancy.common.helper.room.RoomHelper;
 import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
 import com.hosp.occupancy.pojo.dto.room.RoomDto;
+import com.hosp.occupancy.pojo.model.hotel.HotelState;
 import com.hosp.occupancy.pojo.model.room.Economy;
 import com.hosp.occupancy.pojo.model.room.Premium;
 import com.hosp.occupancy.pojo.model.room.RoomAbstract;
@@ -43,7 +44,7 @@ class OccupancyTest {
 
         Mockito.when(customerController.getPotential()).thenReturn(defaultPotential());
         Mockito.when(roomController.getRooms()).thenReturn(defaultRoomDto());
-        HotelStateDto hotelState = occupancy.bookFromScrach();
+        var hotelState = occupancy.bookFromScrach();
 
         Assert.assertEquals(expCountEconomy,hotelState.getCountEconomy());
         Assert.assertEquals(expCountFreeEconomy,hotelState.getCountFreeEconomy());
