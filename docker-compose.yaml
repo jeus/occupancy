@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  occupancy-service:
+    restart: always
+    ports:
+      - "5001:5001"
+    image: openjdk:11
+    command: java -Xmx128m -jar /usr/occupancy.jar
+    volumes:
+      - $PWD/build/libs/occupancy-1.0.0.jar:/usr/occupancy.jar:ro
