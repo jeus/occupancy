@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 @SpringBootTest
-public class PotentialCustomer {
+public class HotelOccupancy {
 
     @Autowired
     CustomerController customerController;
