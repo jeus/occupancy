@@ -9,7 +9,7 @@ import com.hosp.occupancy.common.enums.RoomType;
 import lombok.Data;
 
 @Data
-public abstract class RoomAbstract {
+public class Room {
 
     RoomType roomType = null;
     int floor = 0;

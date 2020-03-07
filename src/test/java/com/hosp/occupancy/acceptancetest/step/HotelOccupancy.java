@@ -9,7 +9,6 @@ import com.hosp.occupancy.common.exception.PublicException;
 import com.hosp.occupancy.core.Occupancy;
 import com.hosp.occupancy.pojo.dto.customer.CustomerPotentialDto;
 import com.hosp.occupancy.pojo.dto.room.FreeRoomDto;
-import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
 import com.hosp.occupancy.rest.CustomerController;
 import com.hosp.occupancy.rest.RoomController;
 import io.cucumber.java.en.Given;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
-import java.util.Map;
 
 @SpringBootTest
 public class HotelOccupancy {
@@ -52,34 +50,19 @@ public class HotelOccupancy {
     @Then("calculate {long} {long} {long} {long}")
     public void calculateCountFreeEconomyCountFreePremiumEconomyIncomePremiumIncome(long countFreeEconomy, long countFreePremium, long economyIncome, long premiumIncome) {
 
-        var hotelState = occupancy.bookFromScrach();
+        var hotelState = occupancy.bookFromScratch();
         Assert.assertEquals("countFreeEconomy:",countFreeEconomy,hotelState.getCountFreeEconomy());
+        Assert.assertEquals("countFreeEconomy:",countFreeEconomy,roomController.getCountFreeEconomy());
         Assert.assertEquals("economyIncome:",economyIncome,hotelState.getEconomyIncome());
-
         Assert.assertEquals("countFreePremium:",countFreePremium,hotelState.getCountFreePremium());
+        Assert.assertEquals("countFreePremium:",countFreePremium,roomController.getCountFreePremium());
         Assert.assertEquals("premiumIncome:",premiumIncome,hotelState.getPremiumIncome());
 
     }
 
 
     public FreeRoomDto freeRoomMapper(int countEconomy, int countPremium) {
-        var row = new FreeRoomDto();
-        row.setCountEconomy(countEconomy);
-        row.setCountPremium(countPremium);
-        return row;
-    }
-
-    public HotelStateDto otelStateMapper(Map<String, String> entry) {
-        HotelStateDto row = new HotelStateDto();
-
-        row.setCountEconomy(Long.parseLong(entry.get("countEconomy")));
-        row.setCountFreeEconomy(Long.parseLong(entry.get("countFreeEconomy")));
-        row.setEconomyIncome(Long.parseLong(entry.get("economyIncome")));
-
-        row.setCountPremium(Long.parseLong(entry.get("countPremium")));
-        row.setCountFreePremium(Long.parseLong(entry.get("countFreePremium")));
-        row.setPremiumIncome(Long.parseLong(entry.get("premiumIncome")));
-        return row;
+        return new FreeRoomDto(countEconomy,countPremium);
     }
 
     public CustomerPotentialDto customerPotentialMapper(String potential) {

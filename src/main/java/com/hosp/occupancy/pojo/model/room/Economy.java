@@ -8,7 +8,7 @@ package com.hosp.occupancy.pojo.model.room;
 import com.hosp.occupancy.common.enums.RoomType;
 
 
-public class Economy extends RoomAbstract {
+public class Economy extends Room {
     public Economy(){setRoomType(RoomType.ECONOMY);}
 
 }

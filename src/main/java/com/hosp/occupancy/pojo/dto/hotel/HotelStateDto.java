@@ -16,5 +16,5 @@ public class HotelStateDto {
     long countFreePremium;
     long economyIncome;
     long premiumIncome;
-    Efficiency efficiency;
+    EfficiencyDto efficiency;
 }

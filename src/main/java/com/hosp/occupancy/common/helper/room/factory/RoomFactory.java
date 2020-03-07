@@ -8,12 +8,12 @@ import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.pojo.dto.room.RoomInsertDto;
 import com.hosp.occupancy.pojo.model.room.Economy;
 import com.hosp.occupancy.pojo.model.room.Premium;
-import com.hosp.occupancy.pojo.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.model.room.Room;
 
 public class RoomFactory extends AbstractFactory {
 
     @Override
-    public RoomAbstract getRoom(RoomInsertDto roomInsertDto) {
+    public Room getRoom(RoomInsertDto roomInsertDto) {
         if (roomInsertDto.getRoomType() == RoomType.ECONOMY) {
             Economy economy = new Economy();
             economy.setFloor(roomInsertDto.getFloor());

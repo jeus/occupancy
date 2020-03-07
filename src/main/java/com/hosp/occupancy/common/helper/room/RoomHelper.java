@@ -6,12 +6,10 @@ package com.hosp.occupancy.common.helper.room;
 
 import com.hosp.occupancy.common.enums.RoomType;
 import com.hosp.occupancy.common.helper.room.factory.RoomFactory;
-import com.hosp.occupancy.pojo.dto.room.RoomDto;
 import com.hosp.occupancy.pojo.dto.room.RoomInsertDto;
-import com.hosp.occupancy.pojo.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.model.room.Room;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Random;
 
 @Component
@@ -34,7 +32,7 @@ public class RoomHelper {
 
 
 
-    public RoomAbstract roomFactory(RoomInsertDto roomInsertDto){
+    public Room roomFactory(RoomInsertDto roomInsertDto){
         RoomFactory roomFactory = new RoomFactory();
         return roomFactory.getRoom(roomInsertDto);
     }

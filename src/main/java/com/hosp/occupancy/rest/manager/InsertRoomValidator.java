@@ -5,7 +5,7 @@
 package com.hosp.occupancy.rest.manager;
 
 import com.hosp.occupancy.common.helper.AssertHelper;
-import com.hosp.occupancy.pojo.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.model.room.Room;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public class InsertRoomValidator {
         this.assertHelper = assertHelper;
     }
 
-    public void validateRoomForInsert(RoomAbstract newRoom, List<RoomAbstract> rooms) {
+    public void validateRoomForInsert(Room newRoom, List<Room> rooms) {
         assertHelper.notNull(newRoom.getNumber());
-        for (RoomAbstract roomAbstract : rooms)
-            assertHelper.isNotEqual(newRoom.getNumber(), roomAbstract.getNumber());
+        for (Room room : rooms)
+            assertHelper.isNotEqual(newRoom.getNumber(), room.getNumber());
     }
 }

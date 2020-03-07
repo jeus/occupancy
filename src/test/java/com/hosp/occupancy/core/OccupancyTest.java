@@ -1,12 +1,11 @@
 package com.hosp.occupancy.core;
 
 import com.hosp.occupancy.common.helper.room.RoomHelper;
-import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
+import com.hosp.occupancy.common.translator.RoomMapper;
+import com.hosp.occupancy.pojo.dto.room.FreeRoomDto;
+import com.hosp.occupancy.pojo.dto.room.HotelDto;
 import com.hosp.occupancy.pojo.dto.room.RoomDto;
-import com.hosp.occupancy.pojo.model.hotel.HotelState;
-import com.hosp.occupancy.pojo.model.room.Economy;
-import com.hosp.occupancy.pojo.model.room.Premium;
-import com.hosp.occupancy.pojo.model.room.RoomAbstract;
+import com.hosp.occupancy.pojo.dto.room.RoomInsertDto;
 import com.hosp.occupancy.rest.CustomerController;
 import com.hosp.occupancy.rest.RoomController;
 import org.junit.Assert;
@@ -27,10 +26,12 @@ class OccupancyTest {
     Occupancy occupancy;
     @MockBean
     CustomerController customerController;
-    @MockBean
+    @Autowired
     RoomController roomController;
     @Autowired
     RoomHelper roomHelper;
+    @Autowired
+    RoomMapper roomMapper;
 
 
     @Test
@@ -43,8 +44,10 @@ class OccupancyTest {
         final long expPremiumIncome=100;
 
         Mockito.when(customerController.getPotential()).thenReturn(defaultPotential());
-        Mockito.when(roomController.getRooms()).thenReturn(defaultRoomDto());
-        var hotelState = occupancy.bookFromScrach();
+        var freeRoomDto = new FreeRoomDto(1,1);
+        roomController.addRooms(freeRoomDto);
+
+        var hotelState = occupancy.bookFromScratch();
 
         Assert.assertEquals(expCountEconomy,hotelState.getCountEconomy());
         Assert.assertEquals(expCountFreeEconomy,hotelState.getCountFreeEconomy());
@@ -59,29 +62,5 @@ class OccupancyTest {
     private List<Integer> defaultPotential() {
         Integer[] arr = {100, 99};
         return Arrays.asList(arr);
-    }
-
-    private RoomDto defaultRoomDto() {
-        RoomDto roomDto = new RoomDto();
-        roomDto.setCountEconomy(1);
-        roomDto.setCountFreeEconomy(1);
-        roomDto.setCountPremium(1);
-        roomDto.setCountFreePremium(1);
-
-        var economy = new Economy();
-        economy.setDescription("Economy Mock room");
-        economy.setFloor(1);
-        economy.setNumber(101);
-
-        var premium = new Premium();
-        premium.setDescription("Premium Mock room");
-        premium.setFloor(1);
-        premium.setNumber(102);
-
-        List<RoomAbstract> rooms = new ArrayList<>();
-        rooms.add(economy);
-        rooms.add(premium);
-        roomDto.setRooms(rooms);
-        return roomDto;
     }
 }

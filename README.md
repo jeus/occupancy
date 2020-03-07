@@ -47,3 +47,17 @@ you could add new test to `Examples` table at `hotel_occupancy.feature` the defa
  | 23, 45, 155, 374, ... | 1        | 7        | 0            | 0            | 45            | 1153          |
  | NEW TEST...           |          |          |              |              |               |               |
 ```
+
+
+##Sample
+```bash
+echo 'Add new Potentials'
+curl -X POST "http://localhost:5001/hotel/customer?potential=99&potential=99&potential=100&potential=100" -H "accept: */*"
+
+echo 'Add new room by wizard'
+curl -X POST "http://localhost:5001/hotel/room/wizard?countEconomy=2&countPremium=2" -H "accept: */*"
+
+echo 'book free rooms and potentials'
+curl -X POST "http://localhost:5001/hotel/book" -H "accept: */*"
+
+```

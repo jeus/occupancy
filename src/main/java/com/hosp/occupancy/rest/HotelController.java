@@ -9,6 +9,7 @@ import com.hosp.occupancy.core.Occupancy;
 import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
 import com.hosp.occupancy.pojo.model.hotel.HotelState;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,9 +32,9 @@ public class HotelController {
         return hotelMapper.toHotelStateDto(hotelState);
     }
 
-    @GetMapping("/book")
+    @PostMapping("/book")
     public HotelStateDto book() {
-        return hotelMapper.toHotelStateDto(occupancy.bookFromScrach());
+        return hotelMapper.toHotelStateDto(occupancy.bookFromScratch());
     }
 
 }

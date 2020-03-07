@@ -4,8 +4,8 @@
  */
 package com.hosp.occupancy.core;
 
-import com.hosp.occupancy.pojo.dto.hotel.HotelStateDto;
-import com.hosp.occupancy.pojo.dto.room.RoomDto;
+import com.hosp.occupancy.common.enums.RoomType;
+import com.hosp.occupancy.pojo.dto.room.HotelDto;
 import com.hosp.occupancy.pojo.model.hotel.Efficiency;
 import com.hosp.occupancy.pojo.model.hotel.HotelState;
 import com.hosp.occupancy.rest.CustomerController;
@@ -31,41 +31,40 @@ public class Occupancy {
     /**
      * call after add rooms
      */
-    public HotelState bookFromScrach() {
+    public HotelState bookFromScratch() {
         var potentials = customerController.getPotential();
-        var roomDto = roomController.getRooms();
         var premiumIncome = 0;
         var economyIncome = 0;
-        if (potentials.isEmpty() || (roomDto.getCountPremium() == 0 && roomDto.getCountEconomy() == 0))
+        if (potentials.isEmpty() || (roomController.getCountPremium() == 0 && roomController.getCountEconomy() == 0))
             return defaultHotelState();
         potentials.sort(Collections.reverseOrder());
-        List<Integer> premiumPotential = potentials.stream().filter(c -> c >= 100).collect(Collectors.toList());
-        List<Integer> economyPotential = potentials.stream().filter(c -> c < 100).collect(Collectors.toList());
+        List<Integer> premiumPotential = potentials.stream().filter(c -> c >= RoomType.PREMIUM.getMinPrice()).collect(Collectors.toList());
+        List<Integer> economyPotential = potentials.stream().filter(c -> c < RoomType.PREMIUM.getMinPrice()).collect(Collectors.toList());
         var efficiency = new Efficiency();
-        efficiency.setPremiumEfficiency(premiumPotential.size() - roomDto.getCountPremium());
-        efficiency.setEconomyEfficiency(economyPotential.size() - roomDto.getCountEconomy());
+        efficiency.setPremiumEfficiency(premiumPotential.size() - roomController.getCountPremium());
+        efficiency.setEconomyEfficiency(economyPotential.size() - roomController.getCountEconomy());
 
         var premiIterator = premiumPotential.iterator();
-        while (premiIterator.hasNext() && roomDto.getCountFreePremium() != 0) {
+        while (premiIterator.hasNext() && roomController.getCountFreePremium() != 0) {
             premiumIncome += premiIterator.next();
-            roomDto.setCountFreePremium(roomDto.getCountFreePremium() - 1);
+            roomController.bookPremium();
             premiIterator.remove();
         }
         var econIterator = economyPotential.iterator();
         while (econIterator.hasNext()) {
-            if (efficiency.getEconomyEfficiency() > 0 && roomDto.getCountFreePremium() > 0) {
+            if (efficiency.getEconomyEfficiency() > 0 && roomController.getCountFreePremium() > 0) {
                 premiumIncome += econIterator.next();
-                roomDto.setCountFreePremium(roomDto.getCountFreePremium() - 1);
+                roomController.bookPremium();
                 econIterator.remove();
             } else {
                 economyIncome += econIterator.next();
-                roomDto.setCountFreeEconomy(roomDto.getCountFreeEconomy() - 1);
+                roomController.bookEconomy();
                 econIterator.remove();
-                if (roomDto.getCountFreeEconomy() == 0)
+                if (roomController.getCountFreeEconomy() == 0)
                     break;
             }
         }
-        return creteHotelState(roomDto, efficiency, premiumIncome, economyIncome);
+        return creteHotelState(roomController.getRooms(), efficiency, premiumIncome, economyIncome);
     }
 
 
@@ -95,14 +94,14 @@ public class Occupancy {
         return hotelState;
     }
 
-    private HotelState creteHotelState(RoomDto roomDto, Efficiency efficiency, int premiumIncode, int economyIncome) {
+    private HotelState creteHotelState(HotelDto hotelDto, Efficiency efficiency, int premiumIncode, int economyIncome) {
         var hotelState = new HotelState();
         hotelState.setPremiumIncome(premiumIncode);
         hotelState.setEconomyIncome(economyIncome);
-        hotelState.setCountEconomy(roomDto.getCountEconomy());
-        hotelState.setCountPremium(roomDto.getCountPremium());
-        hotelState.setCountFreeEconomy(roomDto.getCountFreeEconomy());
-        hotelState.setCountFreePremium(roomDto.getCountFreePremium());
+        hotelState.setCountEconomy(hotelDto.getCountEconomy());
+        hotelState.setCountPremium(hotelDto.getCountPremium());
+        hotelState.setCountFreeEconomy(hotelDto.getCountFreeEconomy());
+        hotelState.setCountFreePremium(hotelDto.getCountFreePremium());
         hotelState.setEfficiency(efficiency);
         return hotelState;
     }

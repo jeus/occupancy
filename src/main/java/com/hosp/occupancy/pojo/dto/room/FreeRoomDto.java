@@ -11,4 +11,9 @@ import lombok.Data;
 public class FreeRoomDto {
     private int countEconomy;
     private int countPremium;
+
+    public FreeRoomDto(int countEconomy, int countPremium) {
+        this.countEconomy = countEconomy;
+        this.countPremium = countPremium;
+    }
 }

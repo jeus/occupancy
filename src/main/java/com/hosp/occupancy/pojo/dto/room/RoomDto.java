@@ -1,21 +1,17 @@
 /*
  * @author jeus (suje@protonmail.com)
- * @since 3/2/20
+ * @since 3/7/20
  */
-
 package com.hosp.occupancy.pojo.dto.room;
 
-import com.hosp.occupancy.pojo.model.room.RoomAbstract;
+import com.hosp.occupancy.common.enums.RoomType;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class RoomDto {
-
-    int countEconomy;
-    int countPremium;
-    int countFreeEconomy;
-    int countFreePremium;
-    List<RoomAbstract> rooms;
+    RoomType roomType = null;
+    int floor = 0;
+    int number = 0;
+    String description = null;
+    boolean free = true;
 }
