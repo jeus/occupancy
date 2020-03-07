@@ -1,0 +1,17 @@
+info:
+  app:
+    desc: Room Occupancy Manager
+    name: Room Occupancy
+    version: 1.0
+    license: GNU
+    contact:
+      email: info@gosaving.com
+      name: Occupancy
+      url: http://www.occupancy.com
+spring:
+  profiles: 
+    active: test
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
