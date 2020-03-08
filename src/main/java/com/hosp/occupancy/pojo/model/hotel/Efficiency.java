@@ -9,6 +9,6 @@ import lombok.Data;
 
 @Data
 public class Efficiency {
-    long economyEfficiency;
-    long premiumEfficiency;
+    private long economyEfficiency;
+    private long premiumEfficiency;
 }

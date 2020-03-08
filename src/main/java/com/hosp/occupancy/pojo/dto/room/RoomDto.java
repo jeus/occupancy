@@ -9,9 +9,9 @@ import lombok.Data;
 
 @Data
 public class RoomDto {
-    RoomType roomType = null;
-    int floor = 0;
-    int number = 0;
-    String description = null;
-    boolean free = true;
+    private RoomType roomType = null;
+    private int floor = 0;
+    private int number = 0;
+    private String description = null;
+    private boolean free = true;
 }

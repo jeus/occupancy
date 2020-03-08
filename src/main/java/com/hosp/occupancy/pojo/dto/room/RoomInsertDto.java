@@ -10,8 +10,8 @@ import lombok.Data;
 
 @Data
 public class RoomInsertDto {
-    RoomType roomType;
-    int floor;
-    int number;
-    String description;
+    private RoomType roomType;
+    private int floor;
+    private int number;
+    private String description;
 }

@@ -20,7 +20,7 @@ class RoomControllerTest {
 
     @BeforeEach
     void setUp() {
-        roomController.rooms = new ArrayList<>();
+        roomController.clearRooms();
     }
 
 

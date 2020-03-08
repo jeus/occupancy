@@ -17,6 +17,7 @@ import com.hosp.occupancy.rest.manager.InsertRoomValidator;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,8 @@ public class RoomController {
     final RoomHelper roomHelper;
 
     private final InsertRoomValidator insertRoomValidator;
-    List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
+    private Date lastUpdate;
 
     public RoomController(InsertRoomValidator insertRoomValidator, RoomHelper roomHelper, RoomMapper roomMapper, HotelMapper hotelMapper) {
         this.insertRoomValidator = insertRoomValidator;
@@ -51,6 +53,7 @@ public class RoomController {
         var roomAbstract = roomFactory.getRoom(roomInsertDto);
         insertRoomValidator.validateRoomForInsert(roomAbstract, rooms);
         rooms.add(roomAbstract);
+        lastUpdate = new Date();
         return hotelMapper.toHotelDto(getCountEconomy(), getCountPremium(), getCountFreeEconomy(), getCountFreePremium(),
                 roomMapper.toRoomDtos(rooms));
     }
@@ -87,16 +90,19 @@ public class RoomController {
     }
 
     public Room bookEconomy() {
-        Optional<Room> roomAbstract = rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.ECONOMY && r.isFree()).findFirst();
-        roomAbstract.ifPresent(room -> room.setFree(false));
-        return roomAbstract.orElse(null);
+        Optional<Room> optionalRoom = rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.ECONOMY && r.isFree()).findFirst();
+        optionalRoom.ifPresent(room -> room.setFree(false));
+        return optionalRoom.orElse(null);
     }
 
     public Room bookPremium() {
-        Optional<Room> roomAbstract = rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.PREMIUM && r.isFree()).findFirst();
-        roomAbstract.ifPresent(room -> room.setFree(false));
-        return roomAbstract.orElse(null);
+        Optional<Room> optionalRoom = rooms.stream().filter(r -> r.isFree() && r.getRoomType() == RoomType.PREMIUM && r.isFree()).findFirst();
+        optionalRoom.ifPresent(room -> room.setFree(false));
+        return optionalRoom.orElse(null);
     }
 
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
 
 }

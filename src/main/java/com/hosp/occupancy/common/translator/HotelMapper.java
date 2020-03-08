@@ -24,7 +24,7 @@ public interface HotelMapper {
 
     EfficiencyDto toEfficiencyDto (Efficiency efficiency);
 
-    Efficiency toEfficiencyD (EfficiencyDto efficiency);
+    Efficiency toEfficiency (EfficiencyDto efficiency);
 
     @Named("toRoomDto")
     default HotelDto toHotelDto(int countEconomy, int countPremium, int countFreeEconomy, int countFreePremium,
