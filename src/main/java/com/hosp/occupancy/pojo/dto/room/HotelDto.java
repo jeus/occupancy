@@ -12,9 +12,9 @@ import java.util.List;
 @Data
 public class HotelDto {
 
-    int countEconomy;
-    int countPremium;
-    int countFreeEconomy;
-    int countFreePremium;
-    List<RoomDto> rooms;
+    private int countEconomy;
+    private int countPremium;
+    private int countFreeEconomy;
+    private int countFreePremium;
+    private List<RoomDto> rooms;
 }
