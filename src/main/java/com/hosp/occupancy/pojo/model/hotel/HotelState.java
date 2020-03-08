@@ -9,11 +9,12 @@ import lombok.Data;
 
 @Data
 public class HotelState {
-    long countEconomy;
-    long countPremium;
-    long countFreeEconomy;
-    long countFreePremium;
-    long economyIncome;
-    long premiumIncome;
-    Efficiency efficiency;
+    private long countEconomy;
+    private long countPremium;
+    private long countFreeEconomy;
+    private long countFreePremium;
+    private long economyIncome;
+    private long premiumIncome;
+    private String description;
+    private Efficiency efficiency;
 }
